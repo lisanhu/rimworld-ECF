@@ -10,7 +10,7 @@ namespace EasyCaravanFormation
     {
         public EasyCaravanFormationMod(ModContentPack pack) : base(pack)
         {
-			new Harmony("EasyCaravanFormationMod").PatchAll();
+            new Harmony("EasyCaravanFormationMod").PatchAll();
         }
     }
 
@@ -21,7 +21,7 @@ namespace EasyCaravanFormation
         {
             if (GenHostility.AnyHostileActiveThreatToPlayer(__instance.map) is false)
             {
-                if (__instance.DebugTryFormCaravanInstantly())
+                if (ToggleIconPatcher.Enable && __instance.DebugTryFormCaravanInstantly())
                 {
                     __instance.Close();
                     return false;
@@ -30,4 +30,29 @@ namespace EasyCaravanFormation
             return true;
         }
     }
+    
+    [HarmonyPatch(typeof(PlaySettings), "DoPlaySettingsGlobalControls", MethodType.Normal)]
+	public class ToggleIconPatcher
+	{
+        public static bool Enable = false;
+        [HarmonyPostfix]
+        public static void AddIcon(WidgetRow row, bool worldView)
+        {
+            if (worldView) return;
+            // bool flag = Find.WindowStack.IsOpen(typeof(TimerSetWindow));
+            // row.ToggleableIcon(ref flag, ContentFinder<Texture2D>.Get("UI/timer_mail", true), "AlertUtility".Translate(), SoundDefOf.Mouseover_ButtonToggle, (string)null);
+            // if (flag != Find.WindowStack.IsOpen(typeof(TimerSetWindow)))
+            // {
+            // 	if (!Find.WindowStack.IsOpen(typeof(TimerSetWindow)))
+            // 	{
+            // 		TimerSetWindow.DrawWindow(AlertUtility.GetEvents());
+            // 	}
+            // 	else
+            // 	{
+            // 		Find.WindowStack.TryRemove(typeof(TimerSetWindow), false);
+            // 	}
+            // }
+            row.ToggleableIcon(ref Enable, ContentFinder<Texture2D>.Get("ECF/caravan", true), "ECF.IconTooltip".Translate());
+		}
+	}
 }

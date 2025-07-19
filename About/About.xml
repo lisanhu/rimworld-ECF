@@ -3,7 +3,10 @@
   <name>Ferny's Easy Caravan Formation - forked</name>
   <author>ferny, RunningBugs</author>
   <packageId>ferny.EasyCaravanFormation.forked</packageId>
-  <description>Caravan formation will mimic the dev mode function “form caravan instantly” when there are no hostile pawns on the tile.</description>
+  <description>Caravan formation will mimic the dev mode function “form caravan instantly” when there are no hostile pawns on the tile.
+
+The toggle button icon credits to [url="https://www.flaticon.com/free-icons/caravan"]Caravan icons created by Mehwish - Flaticon[/url]
+  </description>
   <supportedVersions>
     <li>1.4</li>
 	<li>1.5</li>
